@@ -43,9 +43,12 @@ class CityViewset(MultipleSerializerMixin, ModelViewSet):
     serializer_class = CitySerializer
     
     def get_queryset(self):
-        
         query_set = City.objects.all()
         country = self.request.GET.get('country')
         if country is not None:
             return query_set.filter(country=country)
         return query_set
+    
+    def city_details(request, pk):
+        city = get_object_or_404(City, pk=pk)
+        return render(request, 'city_details.html', {'city': city})

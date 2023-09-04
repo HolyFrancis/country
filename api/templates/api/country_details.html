@@ -10,18 +10,23 @@
 </head>
 <body>
             <div class="row">
-            {% for country in countries %}
+              
               <div class="col-md-3">
+                <h2>Details du pays</h2>
                 <div class="card">
                   <div class="card-body">
                     <h2 class="card-title">{{country.name}}</h2>
                     <p class="card-text">Population: {{country.population}}</p>
                     <p class="card-text">capital: {{country.capital}}</p>
-                    
+                    <p class="card-text">Gdp: {{country.gdp}}</p>
                   </div>
                 </div>
+                <a href=""><h5>Villes</h5></a>
+            
+                  </ul>
+
               </div>
-            {% endfor%}
+
             </div>
 </body>
 </html>
