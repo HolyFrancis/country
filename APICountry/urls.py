@@ -18,5 +18,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('countries/',CountryViewset.country_list, name='countries'),
-    path('countries/<int:id>',CountryViewset.country_details, name='country_details')
+    path('countries/<int:pk>',CountryViewset.country_details, name='country_details'),
+    path('cities/',CityViewset.as_view({'get': 'list'}), name='cities'),
+    path('cities/<int:pk>',CityViewset.city_details, name='city_details')
 ]
