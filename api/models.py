@@ -14,4 +14,12 @@ class Country(models.Model):
     def __str__(self):
         return self.name
     
-#
+# city model
+class City(models.Model):
+    name=models.CharField(max_length=200)
+    population=models.IntegerField(default=False)
+    is_capital=models.BooleanField(default=False)
+    country=models.ForeignKey('api.Country',on_delete=models.CASCADE,related_name='cities')
+    
+    def __str__(self):
+        return self.name
