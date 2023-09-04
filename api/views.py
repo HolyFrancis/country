@@ -1,3 +1,4 @@
+import requests
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ReadOnlyModelViewSet
@@ -29,13 +30,18 @@ class CountryViewset(MultipleSerializerMixin, ReadOnlyModelViewSet):
     def get_queryset(self):
         return Country.objects.all()
     
+    #country template rendering using API Country
     def country_list(request):
-        countries = Country.objects.all()
-        return render(request, 'api/country.html',{'countries':countries})
-    
-    def country_details(request, pk):
-        country = get_object_or_404(Country, pk=pk)
-        return render(request, 'api/country_details.html', {'country': country})
+        api_url = 'https://api.api-ninjas.com/v1/country?name=France'
+        response = requests.get(api_url, headers={'X-Api-Key': 'O9J2KXrDyZ+FVpAgQ5oBwQ==rGz0H3cKMZvDuGU6'}).json()
+        return render(request, 'api/country.html',{'countries':response})
+
+    #country details template rendering using API Country
+    def country_details(request):
+        #country = get_object_or_404(Country)
+        api_url = 'https://api.api-ninjas.com/v1/country?name=France'
+        response = requests.get(api_url, headers={'X-Api-Key': 'O9J2KXrDyZ+FVpAgQ5oBwQ==rGz0H3cKMZvDuGU6'}).json()
+        return render(request, 'api/country_details.html', {'country': response})
 
 
 class CityViewset(MultipleSerializerMixin, ModelViewSet):
@@ -49,6 +55,6 @@ class CityViewset(MultipleSerializerMixin, ModelViewSet):
             return query_set.filter(country=country)
         return query_set
     
-    def city_details(request, pk):
+    def city_details(self, request, pk):
         city = get_object_or_404(City, pk=pk)
-        return render(request, 'city_details.html', {'city': city})
+        return render(request, 'city_details.html', {'cities': city})
