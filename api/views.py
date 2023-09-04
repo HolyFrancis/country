@@ -27,6 +27,10 @@ class CountryViewset(MultipleSerializerMixin, ReadOnlyModelViewSet):
     
     def get_queryset(self):
         return Country.objects.all()
+    
+    def country_list(request):
+        countries = Country.objects.all()
+        return render(request, 'api/country.html',{'countries':countries})
 
 class CityViewset(MultipleSerializerMixin, ModelViewSet):
     
