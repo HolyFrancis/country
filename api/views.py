@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.viewsets import ModelViewSet
 from api.models import Country
@@ -27,6 +28,15 @@ class CountryViewset(MultipleSerializerMixin, ReadOnlyModelViewSet):
     
     def get_queryset(self):
         return Country.objects.all()
+    
+    def country_list(request):
+        countries = Country.objects.all()
+        return render(request, 'api/country.html',{'countries':countries})
+    
+    def country_details(request, pk):
+        country = get_object_or_404(Country, pk=pk)
+        return render(request, 'api/country_details.html', {'country': country})
+
 
 class CityViewset(MultipleSerializerMixin, ModelViewSet):
     

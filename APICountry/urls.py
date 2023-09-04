@@ -16,5 +16,7 @@ router.register('city',CityViewset, basename='city')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('countries/',CountryViewset.country_list, name='countries'),
+    path('countries/<int:id>',CountryViewset.country_details, name='country_details')
 ]
