@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.views import APIView
 from rest_framework.response import Response
 from api.models import Country
 from api.models import City
@@ -64,7 +65,11 @@ class CityViewset(MultipleSerializerMixin, ModelViewSet):
         return render(request, 'city_details.html', {'cities': city})
 
 
-class PhoneNumberValidationViewset(ModelViewSet):
+class PhoneNumberValidationViewset(APIView):
+    
+    def get_queryset(self):
+        return PhoneNumber.objects.all()
+    
     def post(self, request):
         phone_number = request.data.get('phone_number')
         
