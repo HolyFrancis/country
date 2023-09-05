@@ -19,7 +19,7 @@ router.register('city',CityViewset, basename='city')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('validate/', PhoneNumberValidationViewset.as_view(), name='phone_validation'),
+    path('api/validate/', PhoneNumberValidationViewset.as_view(), name='phone_validation'),
     path('countries/',CountryViewset.country_list, name='countries'),
     path('country_details/',CountryViewset.country_details, name='country_details'),
     path('cities/',CityViewset.as_view({'get': 'list'}), name='cities'),
