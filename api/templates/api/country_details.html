@@ -27,12 +27,23 @@
                     <p class="card-text">Exportations: {{country.exports}}</p>
                   </div>
                 </div>
-                <a href=""><h5>Villes</h5></a>
             
-                  </ul>
               {% endfor%}
               </div>
+              <div class="col-md-6">
+                <a href=""><h3>Villes</h3></a>
+                <h3>Validation du numéro de téléphone</h3>
+                <form method="post" action="{% url 'phone_validation' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                      <label class="form-label" for="phone_number">Numéro de téléphone:</label>
+                      <input class="form-control" type="text" name="phone_number" required>
+                    </div>
+                    <button type="submit">Valider</button>
+                </form>
 
+              </div>
+              
             </div>
 </body>
 </html>
