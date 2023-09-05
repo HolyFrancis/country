@@ -23,3 +23,10 @@ class City(models.Model):
     
     def __str__(self):
         return self.name
+
+class PhoneNumber(models.Model):
+    country=models.CharField(max_length=150)
+    phone_number=models.CharField(max_length=150)
+    
+    def __str__(self):
+        return self.phone_number

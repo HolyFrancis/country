@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from api.models import Country
 from api.models import City
+from api.models import PhoneNumber
 
 
 class CitySerializer(ModelSerializer):
@@ -21,4 +22,7 @@ class CountryDetailSerializer(ModelSerializer):
         model = Country
         fields = ['id', 'name', 'population', 'capital', 'gdp', 'pop_density', 'Iso2', 'cities']
         
-        
+class PhoneNumberSerializer(ModelSerializer):
+    class Meta:
+        model = PhoneNumber
+        fields = '__all__'     

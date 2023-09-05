@@ -1,13 +1,18 @@
 import requests
+import phonenumbers
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.views import APIView
+from rest_framework.response import Response
 from api.models import Country
 from api.models import City
+from api.models import PhoneNumber
 from api.serializers import CountrySerializer
 from api.serializers import CountryDetailSerializer
 from api.serializers import CitySerializer
+from api.serializers import PhoneNumberSerializer
 
 # Create your views here.
 class MultipleSerializerMixin:
@@ -58,3 +63,35 @@ class CityViewset(MultipleSerializerMixin, ModelViewSet):
     def city_details(self, request, pk):
         city = get_object_or_404(City, pk=pk)
         return render(request, 'city_details.html', {'cities': city})
+
+
+class PhoneNumberValidationViewset(APIView):
+    
+    def get_queryset(self):
+        return PhoneNumber.objects.all()
+    
+    def post(self, request):
+        phone_number = request.data.get('phone_number')
+        
+        try:
+            parsed_number = phonenumbers.parse(phone_number, None)
+            if not phonenumbers.is_valid_number(parsed_number):
+                return Response({'error': 'Numéro de téléphone invalide.'}, status=400)
+
+            # Récupérez les informations associées au numéro de téléphone
+            country = phonenumbers.region_code_for_number(parsed_number)
+            
+
+            # Créez une instance de PhoneNumber avec les données associées
+            phone_data = {
+                'country': country,
+                'phone_number': phone_number,
+                
+            }
+            serializer = PhoneNumberSerializer(data=phone_data)
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+
+            return Response(serializer.data)
+        except phonenumbers.phonenumberutil.NumberParseException as e:
+            return Response({'error': "Erreur lors de l'analyse du numéro de téléphone."}, status=400)
