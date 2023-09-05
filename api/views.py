@@ -75,13 +75,13 @@ class PhoneNumberValidationViewset(ModelViewSet):
 
             # Récupérez les informations associées au numéro de téléphone
             country = phonenumbers.region_code_for_number(parsed_number)
-            # Ajoutez d'autres données associées au numéro de téléphone si nécessaire
+            
 
             # Créez une instance de PhoneNumber avec les données associées
             phone_data = {
                 'country': country,
                 'phone_number': phone_number,
-                # Ajoutez d'autres champs de données selon vos besoins
+                
             }
             serializer = PhoneNumberSerializer(data=phone_data)
             serializer.is_valid(raise_exception=True)
