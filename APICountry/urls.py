@@ -21,11 +21,12 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/validate/', PhoneNumberValidationViewset.as_view(), name='phone_validation'),
     # API externe
-    path('country/',CountryViewset.country_list, name='countries'),
+    path('country/',CountryViewset.country_list, name='country'),
     path('country_details/',CountryViewset.country_details, name='country_details'),
     # Local API
     path('countries/',CountryViewset.countries_list, name='countries'),
-    path('countries_details/<int:pk>',CountryViewset.countries_details, name='country_details'),
+    path('countries_details/<int:pk>',CountryViewset.countries_details, name='countries_details'),
+    
     path('cities/',CityViewset.as_view({'get': 'list'}), name='cities'),
     path('cities/<int:pk>',CityViewset.city_details, name='city_details')
 ]
