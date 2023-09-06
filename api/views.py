@@ -39,23 +39,23 @@ class CountryViewset(MultipleSerializerMixin, ReadOnlyModelViewSet):
     def country_list(request):
         api_url = 'https://api.api-ninjas.com/v1/country?name=France'
         response = requests.get(api_url, headers={'X-Api-Key': 'O9J2KXrDyZ+FVpAgQ5oBwQ==rGz0H3cKMZvDuGU6'}).json()
-        return render(request, 'api/country.html',{'countries':response})
+        return render(request, 'api/externe/country.html',{'countries':response})
     
     #country template rendering using local API 
     def countries_list(request):
         countries = Country.objects.all()
-        return render(request, 'api/country.html',{'countries':countries})
+        return render(request, 'api/local/country.html',{'countries':countries})
 
     #country details template rendering using API Country
     def country_details(request):
         api_url = 'https://api.api-ninjas.com/v1/country?name=France'
         response = requests.get(api_url, headers={'X-Api-Key': 'O9J2KXrDyZ+FVpAgQ5oBwQ==rGz0H3cKMZvDuGU6'}).json()
-        return render(request, 'api/country_details.html', {'country': response})
+        return render(request, 'api/externe/country_details.html', {'country': response})
     
     #country details template rendering using local API Country
     def countries_details(request, pk):
         country = get_object_or_404(Country, pk=pk)	
-        return render(request, 'api/country_details.html', {'country': country})
+        return render(request, 'api/local/country_details.html', {'country': country})
 class CityViewset(MultipleSerializerMixin, ModelViewSet):
     
     serializer_class = CitySerializer
