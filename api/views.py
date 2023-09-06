@@ -35,6 +35,11 @@ class CountryViewset(MultipleSerializerMixin, ReadOnlyModelViewSet):
         api_url = 'https://api.api-ninjas.com/v1/country?name=France'
         response = requests.get(api_url, headers={'X-Api-Key': 'O9J2KXrDyZ+FVpAgQ5oBwQ==rGz0H3cKMZvDuGU6'}).json()
         return render(request, 'api/country.html',{'countries':response})
+    
+    #country template rendering using local API 
+    def country_list(request):
+        countries = Country.objects.all()
+        return render(request, 'api/country.html',{'countries':countries})
 
     #country details template rendering using API Country
     def country_details(request):
@@ -42,7 +47,11 @@ class CountryViewset(MultipleSerializerMixin, ReadOnlyModelViewSet):
         api_url = 'https://api.api-ninjas.com/v1/country?name=France'
         response = requests.get(api_url, headers={'X-Api-Key': 'O9J2KXrDyZ+FVpAgQ5oBwQ==rGz0H3cKMZvDuGU6'}).json()
         return render(request, 'api/country_details.html', {'country': response})
-
+    
+    #country details template rendering using local API Country
+    def country_details(request, pk):
+        country = get_object_or_404(Country, pk=pk)	
+        return render(request, 'api/country_details.html', {'country': country})
 
 class CityViewset(MultipleSerializerMixin, ModelViewSet):
     
