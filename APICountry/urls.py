@@ -17,8 +17,12 @@ router.register('city',CityViewset, basename='city')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('countries/',CountryViewset.country_list, name='countries'),
+    # API externe
+    path('country/',CountryViewset.country_list, name='countries'),
     path('country_details/',CountryViewset.country_details, name='country_details'),
+    # Local API
+    path('country/',CountryViewset.countries_list, name='countries'),
+    path('country_details/<int:pk>',CountryViewset.countries_details, name='country_details'),
     path('cities/',CityViewset.as_view({'get': 'list'}), name='cities'),
     path('cities/<int:pk>',CityViewset.city_details, name='city_details')
 ]

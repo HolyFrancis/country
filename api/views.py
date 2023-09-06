@@ -37,7 +37,7 @@ class CountryViewset(MultipleSerializerMixin, ReadOnlyModelViewSet):
         return render(request, 'api/country.html',{'countries':response})
     
     #country template rendering using local API 
-    def country_list(request):
+    def countries_list(request):
         countries = Country.objects.all()
         return render(request, 'api/country.html',{'countries':countries})
 
@@ -49,7 +49,7 @@ class CountryViewset(MultipleSerializerMixin, ReadOnlyModelViewSet):
         return render(request, 'api/country_details.html', {'country': response})
     
     #country details template rendering using local API Country
-    def country_details(request, pk):
+    def countries_details(request, pk):
         country = get_object_or_404(Country, pk=pk)	
         return render(request, 'api/country_details.html', {'country': country})
 
