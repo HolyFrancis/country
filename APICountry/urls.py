@@ -27,6 +27,5 @@ urlpatterns = [
     path('countries/',CountryViewset.countries_list, name='countries'),
     path('countries_details/<int:pk>',CountryViewset.countries_details, name='countries_details'),
     
-    path('cities/',CityViewset.as_view({'get': 'list'}), name='cities'),
-    path('cities/<int:pk>',CityViewset.city_details, name='city_details')
+    path('countries/cities/<int:pk>',CountryViewset.country_cities, name='city_details')
 ]
