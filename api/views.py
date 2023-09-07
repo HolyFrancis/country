@@ -56,6 +56,12 @@ class CountryViewset(MultipleSerializerMixin, ReadOnlyModelViewSet):
     def countries_details(request, pk):
         country = get_object_or_404(Country, pk=pk)	
         return render(request, 'api/local/country_details.html', {'country': country})
+    
+    #list of cities for a country
+    def country_cities(request, pk):
+        cities = get_object_or_404(Country, pk=pk)	
+        return render(request, 'api/local/city_details.html', {'country': cities})
+    
 class CityViewset(MultipleSerializerMixin, ModelViewSet):
     
     serializer_class = CitySerializer
@@ -67,9 +73,13 @@ class CityViewset(MultipleSerializerMixin, ModelViewSet):
             return query_set.filter(country=country)
         return query_set
     
-    def city_details(self, request, pk):
+    def city_list(request):
+        cities = City.objects.all()
+        return render(request, 'api/local/city_details.html',{'cities': cities})
+    
+    def city_details(request, pk):
         city = get_object_or_404(City, pk=pk)
-        return render(request, 'city_details.html', {'cities': city})
+        return render(request, 'api/local/city_details.html', {'cities': city})
 
 
 class PhoneNumberValidationViewset(APIView):

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link href="{% static 'api/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'api/css/styles.css' %}" rel="stylesheet">
+</head>
+<body>
+    <h2>{{country.name}} cities</h2>
+            <div class="row">
+            {% for city in country.cities.all%}
+              <div class="col-md-2">
+                <div class="card">
+                  <div class="card-body">
+                    <ul>
+                      <h4 class="card-text">{{city.name}}</h4>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+</body>
+</html>

@@ -28,7 +28,7 @@
               
               </div>
               <div class="col-md-6">
-                <a href=""><h3>Villes</h3></a>
+                <a href="{% url 'city_details' country.id %}"><h3> Les Villes de ce pays</h3></a>
                 <h3>Validation du numéro de téléphone</h3>
                 <form method="post" action="{% url 'phone_validation' %}">
                     {% csrf_token %}
