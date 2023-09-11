@@ -10,23 +10,24 @@
 </head>
 <body>
   <div class="row">
-    
-      <div class="col-md-3">
-        <h2>Details du pays</h2>
-          <div class="card">
-            <div class="card-body">
-              <h2 class="card-title">{{country.name}}</h2>
-              <p class="card-text">Population: {{country.population}}</p>
-              <p class="card-text">capital: {{country.capital}}</p>
-              <p class="card-text">Gdp: {{country.gdp}}</p>
-              <p class="card-text">Superficie: {{country.surface_area}}</p>
-              <p class="card-text">Population urbaine: {{country.urban_population}}</p>
-              <p class="card-text">Region: {{country.region}}</p>
-              <p class="card-text">Fertilité: {{country.fertility}}</p>
-              <p class="card-text">Touristes: {{country.tourists}}</p>                <p class="card-text">Exportations: {{countr.exports}}</p>
+      {% for country in country %}
+        <div class="col-md-3">
+          <h2>Details du pays</h2>
+            <div class="card">
+              <div class="card-body">
+                <h2 class="card-title">{{country.name}}</h2>
+                <p class="card-text">Population: {{country.population}}</p>
+                <p class="card-text">capital: {{country.capital}}</p>
+                <p class="card-text">Gdp: {{country.gdp}}</p>
+                <p class="card-text">Superficie: {{country.surface_area}}</p>
+                <p class="card-text">Population urbaine: {{country.urban_population}}</p>
+                <p class="card-text">Region: {{country.region}}</p>
+                <p class="card-text">Fertilité: {{country.fertility}}</p>
+                <p class="card-text">Touristes: {{country.tourists}}</p>                <p class="card-text">Exportations: {{countr.exports}}</p>
+              </div>
             </div>
-          </div>
-      </div>
+        </div>
+      {% endfor %}
       <div class="col-md-6">
         <a href=""><h3>Villes</h3></a>
         <h3>Validation du numéro de téléphone</h3>
