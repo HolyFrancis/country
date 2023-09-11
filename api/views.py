@@ -5,6 +5,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.models import Country
 from api.models import City
@@ -37,7 +38,7 @@ class CountryViewset(MultipleSerializerMixin, ReadOnlyModelViewSet):
     
     #country template rendering using API Country
     def country_list(request):
-        api_url = 'https://api.api-ninjas.com/v1/country?name=France'
+        api_url = 'https://api.api-ninjas.com/v1/country?limit=20'
         response = requests.get(api_url, headers={'X-Api-Key': 'O9J2KXrDyZ+FVpAgQ5oBwQ==rGz0H3cKMZvDuGU6'}).json()
         return render(request, 'api/externe/country.html',{'countries':response})
     
@@ -47,8 +48,8 @@ class CountryViewset(MultipleSerializerMixin, ReadOnlyModelViewSet):
         return render(request, 'api/local/country.html',{'countries':countries})
 
     #country details template rendering using API Country
-    def country_details(request):
-        api_url = 'https://api.api-ninjas.com/v1/country?name=France'
+    def country_details(request, country):
+        api_url = f'https://api.api-ninjas.com/v1/country?name={country}'
         response = requests.get(api_url, headers={'X-Api-Key': 'O9J2KXrDyZ+FVpAgQ5oBwQ==rGz0H3cKMZvDuGU6'}).json()
         return render(request, 'api/externe/country_details.html', {'country': response})
     
@@ -112,3 +113,5 @@ class PhoneNumberValidationViewset(APIView):
             return Response(serializer.data)
         except phonenumbers.phonenumberutil.NumberParseException as e:
             return Response({'error': "Erreur lors de l'analyse du numéro de téléphone."}, status=400)
+    
+    

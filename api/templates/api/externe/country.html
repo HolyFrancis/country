@@ -17,7 +17,7 @@
                   <div class="card-body">
                     <h3 class="card-title">{{country.name}}</h3>
                     <p class="card-text">capital: {{country.capital}}</p>
-                    <a class="btn btn-primary" href="{% url 'country_details' %}">Voir Plus</a>
+                    <a class="btn btn-primary" href="{% url 'country_details' country.name %}">Voir Plus</a>
                   </div>
                 </div>
               </div>
