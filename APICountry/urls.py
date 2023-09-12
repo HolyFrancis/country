@@ -23,6 +23,7 @@ urlpatterns = [
     # API externe
     path('country/',CountryViewset.country_list, name='country'),
     path('country_details/<str:country>/',CountryViewset.country_details, name='country_details'),
+    path('country_details/cities/<str:country_iso>/',CountryViewset.cities_of_country, name='country_cities'),
     # Local API
     path('countries/',CountryViewset.countries_list, name='countries'),
     path('countries_details/<int:pk>',CountryViewset.countries_details, name='countries_details'),
