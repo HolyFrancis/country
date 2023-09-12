@@ -26,10 +26,11 @@
                 <p class="card-text">Touristes: {{country.tourists}}</p>                <p class="card-text">Exportations: {{countr.exports}}</p>
               </div>
             </div>
+            <a href="{% url 'country_cities' country.iso2 %}"><h3>Cliquer ici pour voir les villes de ce pays</h3></a>
         </div>
       {% endfor %}
       <div class="col-md-6">
-        <a href=""><h3>Villes</h3></a>
+        
         <h3>Validation du numéro de téléphone</h3>
         <form method="post" action="" id="phone-form">
           {% csrf_token %}
