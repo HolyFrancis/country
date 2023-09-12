@@ -63,6 +63,11 @@ class CountryViewset(MultipleSerializerMixin, ReadOnlyModelViewSet):
         cities = get_object_or_404(Country, pk=pk)	
         return render(request, 'api/local/city_details.html', {'country': cities})
     
+    def cities_of_country(request, country_iso):
+        api_url = f'https://api.api-ninjas.com/v1/city?country={country_iso}&limit=15'
+        response = requests.get(api_url, headers={'X-Api-Key': 'O9J2KXrDyZ+FVpAgQ5oBwQ==rGz0H3cKMZvDuGU6'}).json()
+        return render(request, 'api/externe/country_cities.html',{'cities': response})
+        
 class CityViewset(MultipleSerializerMixin, ModelViewSet):
     
     serializer_class = CitySerializer
